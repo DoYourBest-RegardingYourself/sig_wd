@@ -96,7 +96,7 @@ class SigNet_thin(nn.Module):
 
 
 class SigNet_smaller(nn.Module):
-    def __init__(self):
+    def __init__(self, num_classes=10):
         super(SigNet_smaller, self).__init__()
 
         self.feature_space_size = 2048
@@ -112,11 +112,13 @@ class SigNet_smaller(nn.Module):
         ]))
 
         self.fc_layers = nn.Sequential(OrderedDict([
-            ('fc1', linear_bn_relu(256 * 3 * 5, 2048)),
+            ('fc1', linear_bn_relu(6400, 2048)),
         ]))
+        self.fc = nn.Linear(self.feature_space_size, num_classes)
 
     def forward(self, inputs):
         x = self.conv_layers(inputs)
-        x = x.view(x.shape[0], 256 * 3 * 5)
+        x = x.view(x.shape[0], 6400)
         x = self.fc_layers(x)
         return x
+

@@ -140,9 +140,9 @@ if __name__ == '__main__':
                         help='输入图像尺寸（高度, 宽度）')
 
     # 数据集划分参数
-    parser.add_argument('--exp-users', type=int, nargs=2, default=(0, 300),
+    parser.add_argument('--exp-users', type=int, nargs=2, default=(0, 100),
                         help='实验集用户ID范围（起始, 结束）')
-    parser.add_argument('--dev-users', type=int, nargs=2, default=(0, 300),
+    parser.add_argument('--dev-users', type=int, nargs=2, default=(0, 100),
                         help='开发集用户ID范围（起始, 结束）')
 
     # 训练/测试数据配置
@@ -184,7 +184,7 @@ if __name__ == '__main__':
         for client_id in range(num_clients):
             arguments.model_path = f'{base_path}\\{subdir}\\{client_id}GPDS_FedCTF.pth'
             arguments.save_path = f'../../result/{subdir}_client{client_id}_results.pkl'
-            arguments.data_path = '../../data/gpds.npz'
+            arguments.data_path = '../../data/Bengali.npz'
             print(f'\n{"="*60}')
             print(f'测试子目录: {subdir}, 客户端: {client_id}')
             print(f'模型路径: {arguments.model_path}')
